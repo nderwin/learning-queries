@@ -22,6 +22,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -35,6 +36,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "nppes")
 @XmlRootElement
 @NamedQueries({
+    @NamedQuery(
+            name = "Nppes.findAll", 
+            query = "SELECT n FROM Nppes n WHERE "
+                    + "(:npi IS NOT NULL AND LENGTH(:npi) > 0 AND n.npi = :npi) "
+                    + "OR (:companyName IS NOT NULL AND LENGTH(:companyName) > 0 AND n.providerOrganizationNameLegalBusinessName = :companyName) "
+                    + "OR (:lastName IS NOT NULL AND LENGTH(:lastName) > 0 AND n.providerLastNameLegalName = :lastName) "
+                    + "OR (:firstName IS NOT NULL AND LENGTH(:firstName) > 0 AND n.providerFirstName = :firstName) "
+                    + "ORDER BY n.providerLastNameLegalName, n.providerFirstName"
+    )
 })
 public class Nppes implements Serializable {
 
