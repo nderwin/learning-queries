@@ -3,6 +3,10 @@
   <persistence-unit name="lqPU" transaction-type="JTA">
     <jta-data-source>java:/lqDS</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties/>
+    <properties>
+        <property name="hibernate.show_sql" value="true" />
+        <property name="hibernate.format_sql" value="true" />
+        <property name="hibernate.globally_quoted_identifiers" value="true"/>
+    </properties>
   </persistence-unit>
 </persistence>

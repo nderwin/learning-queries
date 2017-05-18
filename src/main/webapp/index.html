@@ -13,6 +13,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script type="text/javascript" charset="utf-8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        <script src="jquery-loader.js"></script>
 
         <script>
             $(document).ready(function () {
@@ -43,6 +44,7 @@
                 $('#manualForm').submit(function (evt) {
                     evt.preventDefault();
 
+                    $.loader.open();
                     $.ajax({
                         url: evt.target.action + "?" + $('#manualForm').serialize(),
                         type: 'get',
@@ -58,8 +60,41 @@
                                     data[i].lastName
                                 ]).draw(false);
                             }
+                            
+                            $.loader.close();
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
+                            $.loader.close();
+                            alert(textStatus + " - " + errorThrown);
+                        }
+                    });
+                });
+
+                // JPA tab setup
+                $('#jpaForm').submit(function (evt) {
+                    evt.preventDefault();
+
+                    $.loader.open();
+                    $.ajax({
+                        url: evt.target.action + "?" + $('#jpaForm').serialize(),
+                        type: 'get',
+                        dataType: 'json',
+                        success: function (data, textStatus, jqXHR) {
+                            table.clear();
+                            
+                            for (i = 0; i < data.length; i++) {
+                                table.row.add([
+                                    data[i].NPI,
+                                    data[i].companyName,
+                                    data[i].firstName,
+                                    data[i].lastName
+                                ]).draw(false);
+                            }
+                            
+                            $.loader.close();
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            $.loader.close();
                             alert(textStatus + " - " + errorThrown);
                         }
                     });
@@ -94,10 +129,8 @@
         </nav>
 
         <div class="jumbotron">
-            <section id="manual" class="tab-content active">
+            <div id="manual" class="tab-content active">
                 <div class="container">
-                    <h3 class="hidden">Manually Constructed</h3>
-
                     <form id="manualForm" action="/lq/api/manual">
                         <div class="form-group">
                             <label for="npi">NPI</label>
@@ -120,27 +153,42 @@
                         <button type="reset" class="btn">Reset</button>
                     </form>
                 </div>
-            </section>
-            <section id="jpa" class="tab-content hide">
+            </div>
+            <div id="jpa" class="tab-content hide">
                 <div class="container">
-                    <h3 class="hidden">JPA</h3>
+                    <form id="jpaForm" action="/lq/api/jpa">
+                        <div class="form-group">
+                            <label for="npi-jpa">NPI</label>
+                            <input type="text" class="form-control" id="npi-jpa" name="npi" placeholder="NPI" size="10" maxlength="10" />
+                        </div>
+                        <div class="form-group">
+                            <label for="firstName-jpa">First Name</label>
+                            <input type="text" class="form-control" id="firstName-jpa" name="firstName" placeholder="First Name" maxlength="255"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName-jpa">Last Name</label>
+                            <input type="text" class="form-control" id="lastName-jpa" name="lastName" placeholder="Last Name" maxlength="255" />
+                        </div>
+                        <div class="form-group">
+                            <label for="companyName-jpa">Company Name</label>
+                            <input type="text" class="form-control" id="companyName-jpa" name="companyName" placeholder="Company Name" maxlength="255" />
+                        </div>
 
+                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button type="reset" class="btn">Reset</button>
+                    </form>
                 </div>
-            </section>
-            <section id="namedjpa" class="tab-content hide">
+            </div>
+            <div id="namedjpa" class="tab-content hide">
                 <div class="container">
-                    <h3 class="hidden">Named JPA</h3>
-
                 </div>
-            </section>
-            <section id="builder" class="tab-content hide">
+            </div>
+            <div id="builder" class="tab-content hide">
                 <div class="container">
-                    <h3 class="hidden">Criteria Builder</h3>
-
                 </div>
-            </section>
+            </div>
 
-            <section id="data" class="tab-pane">
+            <div id="data" class="tab-pane">
                 <div class="container">
                     <h3>Results</h3>
 
@@ -163,7 +211,7 @@
                         </tbody>
                     </table>
                 </div>
-            </section>
+            </div>
         </div>
     </body>
 </html>
