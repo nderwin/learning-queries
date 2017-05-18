@@ -40,18 +40,18 @@
                     ordering: false
                 });
 
-                // Manual tab setup
-                $('#manualForm').submit(function (evt) {
+                // Form submission functionality
+                function formSubmit(form, evt) {
                     evt.preventDefault();
 
                     $.loader.open();
                     $.ajax({
-                        url: evt.target.action + "?" + $('#manualForm').serialize(),
+                        url: evt.target.action + "?" + form.serialize(),
                         type: 'get',
                         dataType: 'json',
                         success: function (data, textStatus, jqXHR) {
                             table.clear();
-                            
+
                             for (i = 0; i < data.length; i++) {
                                 table.row.add([
                                     data[i].NPI,
@@ -60,7 +60,7 @@
                                     data[i].lastName
                                 ]).draw(false);
                             }
-                            
+
                             $.loader.close();
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
@@ -68,36 +68,21 @@
                             alert(textStatus + " - " + errorThrown);
                         }
                     });
+                }
+
+                // Manual tab setup
+                $('#manualForm').submit(function (evt) {
+                    formSubmit($(this), evt);
                 });
 
                 // JPA tab setup
                 $('#jpaForm').submit(function (evt) {
-                    evt.preventDefault();
+                    formSubmit($(this), evt);
+                });
 
-                    $.loader.open();
-                    $.ajax({
-                        url: evt.target.action + "?" + $('#jpaForm').serialize(),
-                        type: 'get',
-                        dataType: 'json',
-                        success: function (data, textStatus, jqXHR) {
-                            table.clear();
-                            
-                            for (i = 0; i < data.length; i++) {
-                                table.row.add([
-                                    data[i].NPI,
-                                    data[i].companyName,
-                                    data[i].firstName,
-                                    data[i].lastName
-                                ]).draw(false);
-                            }
-                            
-                            $.loader.close();
-                        },
-                        error: function (jqXHR, textStatus, errorThrown) {
-                            $.loader.close();
-                            alert(textStatus + " - " + errorThrown);
-                        }
-                    });
+                // JPA tab setup
+                $('#namedJpaForm').submit(function (evt) {
+                    formSubmit($(this), evt);
                 });
             });
         </script>
@@ -181,6 +166,27 @@
             </div>
             <div id="namedjpa" class="tab-content hide">
                 <div class="container">
+                    <form id="namedJpaForm" action="/lq/api/jpa">
+                        <div class="form-group">
+                            <label for="npi-namedJpa">NPI</label>
+                            <input type="text" class="form-control" id="npi-namedJpa" name="npi" placeholder="NPI" size="10" maxlength="10" />
+                        </div>
+                        <div class="form-group">
+                            <label for="firstName-namedJpa">First Name</label>
+                            <input type="text" class="form-control" id="firstName-namedJpa" name="firstName" placeholder="First Name" maxlength="255"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName-namedJpa">Last Name</label>
+                            <input type="text" class="form-control" id="lastName-namedJpa" name="lastName" placeholder="Last Name" maxlength="255" />
+                        </div>
+                        <div class="form-group">
+                            <label for="companyName-namedJpa">Company Name</label>
+                            <input type="text" class="form-control" id="companyName-namedJpa" name="companyName" placeholder="Company Name" maxlength="255" />
+                        </div>
+
+                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button type="reset" class="btn">Reset</button>
+                    </form>
                 </div>
             </div>
             <div id="builder" class="tab-content hide">
