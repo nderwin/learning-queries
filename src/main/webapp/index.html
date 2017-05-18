@@ -13,6 +13,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script type="text/javascript" charset="utf-8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        <script src="jquery-loader.js"></script>
 
         <script>
             $(document).ready(function () {
@@ -43,6 +44,7 @@
                 $('#manualForm').submit(function (evt) {
                     evt.preventDefault();
 
+                    $.loader.open();
                     $.ajax({
                         url: evt.target.action + "?" + $('#manualForm').serialize(),
                         type: 'get',
@@ -58,8 +60,11 @@
                                     data[i].lastName
                                 ]).draw(false);
                             }
+                            
+                            $.loader.close();
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
+                            $.loader.close();
                             alert(textStatus + " - " + errorThrown);
                         }
                     });
@@ -94,9 +99,9 @@
         </nav>
 
         <div class="jumbotron">
-            <section id="manual" class="tab-content active">
+            <div id="manual" class="tab-content active">
                 <div class="container">
-                    <h3 class="hidden">Manually Constructed</h3>
+                    <!--<h3 class="hidden">Manually Constructed</h3>-->
 
                     <form id="manualForm" action="/lq/api/manual">
                         <div class="form-group">
@@ -120,27 +125,27 @@
                         <button type="reset" class="btn">Reset</button>
                     </form>
                 </div>
-            </section>
-            <section id="jpa" class="tab-content hide">
+            </div>
+            <div id="jpa" class="tab-content hide">
                 <div class="container">
                     <h3 class="hidden">JPA</h3>
 
                 </div>
-            </section>
-            <section id="namedjpa" class="tab-content hide">
+            </div>
+            <div id="namedjpa" class="tab-content hide">
                 <div class="container">
                     <h3 class="hidden">Named JPA</h3>
 
                 </div>
-            </section>
-            <section id="builder" class="tab-content hide">
+            </div>
+            <div id="builder" class="tab-content hide">
                 <div class="container">
                     <h3 class="hidden">Criteria Builder</h3>
 
                 </div>
-            </section>
+            </div>
 
-            <section id="data" class="tab-pane">
+            <div id="data" class="tab-pane">
                 <div class="container">
                     <h3>Results</h3>
 
@@ -163,7 +168,7 @@
                         </tbody>
                     </table>
                 </div>
-            </section>
+            </div>
         </div>
     </body>
 </html>
