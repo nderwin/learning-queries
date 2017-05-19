@@ -70,7 +70,7 @@ public class ManualResource {
             StringBuilder sb = new StringBuilder("SELECT \"NPI\", \"Provider_Organization_Name__Legal_Business_Name\", \"Provider_Last_Name__Legal_Name\", \"Provider_First_Name\" FROM nppes");
             boolean nowhere = true;
             
-            if (null != npi && !npi.isEmpty()) {
+            if (null != npi && !npi.trim().isEmpty()) {
                 if (nowhere) {
                     sb.append(" WHERE");
                     nowhere = false;
@@ -81,7 +81,7 @@ public class ManualResource {
                 sb.append("'");
             }
 
-            if (null != firstName && !firstName.isEmpty()) {
+            if (null != firstName && !firstName.trim().isEmpty()) {
                 if (nowhere) {
                     sb.append(" WHERE");
                     nowhere = false;
@@ -94,7 +94,7 @@ public class ManualResource {
                 sb.append("'");
             }
 
-            if (null != lastName && !lastName.isEmpty()) {
+            if (null != lastName && !lastName.trim().isEmpty()) {
                 if (nowhere) {
                     sb.append(" WHERE");
                     nowhere = false;
@@ -107,7 +107,7 @@ public class ManualResource {
                 sb.append("'");
             }
 
-            if (null != companyName && !companyName.isEmpty()) {
+            if (null != companyName && !companyName.trim().isEmpty()) {
                 if (nowhere) {
                     sb.append(" WHERE");
                 } else {

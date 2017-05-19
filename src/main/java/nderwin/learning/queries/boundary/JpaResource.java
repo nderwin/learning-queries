@@ -68,7 +68,7 @@ public class JpaResource {
         boolean addLn = false;
         boolean addCn = false;
 
-        if (null != npi && !npi.isEmpty()) {
+        if (null != npi && !npi.trim().isEmpty()) {
             if (nowhere) {
                 sb.append(" WHERE");
                 nowhere = false;
@@ -78,7 +78,7 @@ public class JpaResource {
             addNpi = true;
         }
 
-        if (null != firstName && !firstName.isEmpty()) {
+        if (null != firstName && !firstName.trim().isEmpty()) {
             if (nowhere) {
                 sb.append(" WHERE");
                 nowhere = false;
@@ -90,7 +90,7 @@ public class JpaResource {
             addFn = true;
         }
 
-        if (null != lastName && !lastName.isEmpty()) {
+        if (null != lastName && !lastName.trim().isEmpty()) {
             if (nowhere) {
                 sb.append(" WHERE");
                 nowhere = false;
@@ -102,7 +102,7 @@ public class JpaResource {
             addLn = true;
         }
 
-        if (null != companyName && !companyName.isEmpty()) {
+        if (null != companyName && !companyName.trim().isEmpty()) {
             if (nowhere) {
                 sb.append(" WHERE");
             } else {
