@@ -50,7 +50,7 @@
                         type: 'get',
                         dataType: 'json',
                         success: function (data, textStatus, jqXHR) {
-                            table.clear();
+                            table.clear().draw();
 
                             for (i = 0; i < data.length; i++) {
                                 table.row.add([
@@ -82,6 +82,11 @@
 
                 // JPA tab setup
                 $('#namedJpaForm').submit(function (evt) {
+                    formSubmit($(this), evt);
+                });
+
+                // JPA tab setup
+                $('#builderForm').submit(function (evt) {
                     formSubmit($(this), evt);
                 });
             });
@@ -166,7 +171,7 @@
             </div>
             <div id="namedjpa" class="tab-content hide">
                 <div class="container">
-                    <form id="namedJpaForm" action="/lq/api/jpa">
+                    <form id="namedJpaForm" action="/lq/api/namedjpa">
                         <div class="form-group">
                             <label for="npi-namedJpa">NPI</label>
                             <input type="text" class="form-control" id="npi-namedJpa" name="npi" placeholder="NPI" size="10" maxlength="10" />
@@ -191,6 +196,27 @@
             </div>
             <div id="builder" class="tab-content hide">
                 <div class="container">
+                    <form id="builderForm" action="/lq/api/builder">
+                        <div class="form-group">
+                            <label for="npi-builder">NPI</label>
+                            <input type="text" class="form-control" id="npi-builder" name="npi" placeholder="NPI" size="10" maxlength="10" />
+                        </div>
+                        <div class="form-group">
+                            <label for="firstName-builder">First Name</label>
+                            <input type="text" class="form-control" id="firstName-builder" name="firstName" placeholder="First Name" maxlength="255"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName-builder">Last Name</label>
+                            <input type="text" class="form-control" id="lastName-builder" name="lastName" placeholder="Last Name" maxlength="255" />
+                        </div>
+                        <div class="form-group">
+                            <label for="companyName-builder">Company Name</label>
+                            <input type="text" class="form-control" id="companyName-builder" name="companyName" placeholder="Company Name" maxlength="255" />
+                        </div>
+
+                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button type="reset" class="btn">Reset</button>
+                    </form>
                 </div>
             </div>
 
