@@ -118,19 +118,19 @@ public class JpaResource {
         TypedQuery<Nppes> tq = em.createQuery(sb.toString(), Nppes.class);
         
         if (addNpi) {
-            tq.setParameter("npi", npi);
+            tq.setParameter("npi", npi.toUpperCase());
         }
         
         if (addFn) {
-            tq.setParameter("firstName", firstName);
+            tq.setParameter("firstName", firstName.toUpperCase());
         }
         
         if (addLn) {
-            tq.setParameter("lastName", lastName);
+            tq.setParameter("lastName", lastName.toUpperCase());
         }
         
         if (addCn) {
-            tq.setParameter("companyName", companyName);
+            tq.setParameter("companyName", companyName.toUpperCase());
         }
         
         tq.setMaxResults(limit);
