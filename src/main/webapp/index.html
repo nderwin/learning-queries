@@ -1,40 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
         <title>Learning Queries</title>
 
-        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css" />
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">
+                        <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
+                        Learning Queries
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <ul id="tabs" class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#manual" role="tab" data-toggle="tab">Manual</a></li>
+            <li role="presentation"><a href="#jpa" role="tab" data-toggle="tab">JPA</a></li>
+            <li role="presentation"><a href="#namedjpa" role="tab" data-toggle="tab">Named JPA</a></li>
+            <li role="presentation"><a href="#builder" role="tab" data-toggle="tab">Criteria Builder</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="manual">
+                <div class="container">
+                    <form id="manualForm" action="/lq/api/manual">
+                        <div class="form-group">
+                            <label for="npi">NPI</label>
+                            <input type="text" class="form-control" id="npi" name="npi" placeholder="NPI" size="10" maxlength="10" />
+                        </div>
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" maxlength="255"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" maxlength="255" />
+                        </div>
+                        <div class="form-group">
+                            <label for="companyName">Company Name</label>
+                            <input type="text" class="form-control" id="companyName" name="companyName" placeholder="Company Name" maxlength="255" />
+                        </div>
+
+                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button type="reset" class="btn">Reset</button>
+                    </form>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="jpa">
+                <div class="container">
+                    <form id="jpaForm" action="/lq/api/jpa">
+                        <div class="form-group">
+                            <label for="npi-jpa">NPI</label>
+                            <input type="text" class="form-control" id="npi-jpa" name="npi" placeholder="NPI" size="10" maxlength="10" />
+                        </div>
+                        <div class="form-group">
+                            <label for="firstName-jpa">First Name</label>
+                            <input type="text" class="form-control" id="firstName-jpa" name="firstName" placeholder="First Name" maxlength="255"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName-jpa">Last Name</label>
+                            <input type="text" class="form-control" id="lastName-jpa" name="lastName" placeholder="Last Name" maxlength="255" />
+                        </div>
+                        <div class="form-group">
+                            <label for="companyName-jpa">Company Name</label>
+                            <input type="text" class="form-control" id="companyName-jpa" name="companyName" placeholder="Company Name" maxlength="255" />
+                        </div>
+
+                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button type="reset" class="btn">Reset</button>
+                    </form>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="namedjpa">
+                <div class="container">
+                    <form id="namedJpaForm" action="/lq/api/namedjpa">
+                        <div class="form-group">
+                            <label for="npi-namedJpa">NPI</label>
+                            <input type="text" class="form-control" id="npi-namedJpa" name="npi" placeholder="NPI" size="10" maxlength="10" />
+                        </div>
+                        <div class="form-group">
+                            <label for="firstName-namedJpa">First Name</label>
+                            <input type="text" class="form-control" id="firstName-namedJpa" name="firstName" placeholder="First Name" maxlength="255"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName-namedJpa">Last Name</label>
+                            <input type="text" class="form-control" id="lastName-namedJpa" name="lastName" placeholder="Last Name" maxlength="255" />
+                        </div>
+                        <div class="form-group">
+                            <label for="companyName-namedJpa">Company Name</label>
+                            <input type="text" class="form-control" id="companyName-namedJpa" name="companyName" placeholder="Company Name" maxlength="255" />
+                        </div>
+
+                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button type="reset" class="btn">Reset</button>
+                    </form>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="builder">
+                <div class="container">
+                    <form id="builderForm" action="/lq/api/builder">
+                        <div class="form-group">
+                            <label for="npi-builder">NPI</label>
+                            <input type="text" class="form-control" id="npi-builder" name="npi" placeholder="NPI" size="10" maxlength="10" />
+                        </div>
+                        <div class="form-group">
+                            <label for="firstName-builder">First Name</label>
+                            <input type="text" class="form-control" id="firstName-builder" name="firstName" placeholder="First Name" maxlength="255"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName-builder">Last Name</label>
+                            <input type="text" class="form-control" id="lastName-builder" name="lastName" placeholder="Last Name" maxlength="255" />
+                        </div>
+                        <div class="form-group">
+                            <label for="companyName-builder">Company Name</label>
+                            <input type="text" class="form-control" id="companyName-builder" name="companyName" placeholder="Company Name" maxlength="255" />
+                        </div>
+
+                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button type="reset" class="btn">Reset</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="data" class="container">
+            <h3>Search Results</h3>
+
+            <table id="dataTable" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>NPI</th>
+                        <th>Company</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="loadingModalLabel">Loading...</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                <span class="sr-only"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script type="text/javascript" charset="utf-8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
-        <script src="jquery-loader.js"></script>
+        <script type="text/javascript" charset="utf-8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
 
-        <script>
+        <script type="text/javascript">
             $(document).ready(function () {
-                // Navbar setup
-                $('.navbar-nav > li > a').click(function (evt) {
-                    evt.preventDefault();
-
-                    var active_tab_selector = $('.navbar-nav > li.active > a').attr('href');
-                    var active_nav = $('.navbar-nav > li.active');
-                    active_nav.removeClass('active');
-
-                    $(this).parents('li').addClass('active');
-
-                    $(active_tab_selector).removeClass('active');
-                    $(active_tab_selector).addClass('hide');
-
-                    var target_tab_selector = $(this).attr('href');
-                    $(target_tab_selector).removeClass('hide');
-                    $(target_tab_selector).addClass('active');
-                });
-                
                 // Data table setup
                 var table = $('#dataTable').DataTable({
                     ordering: false
@@ -44,7 +199,12 @@
                 function formSubmit(form, evt) {
                     evt.preventDefault();
 
-                    $.loader.open();
+                    $('#loadingModal').modal({
+                        backdrop: 'static',
+                        keyboard: false,
+                        show: true
+                    });
+
                     $.ajax({
                         url: evt.target.action + "?" + form.serialize(),
                         type: 'get',
@@ -61,10 +221,10 @@
                                 ]).draw(false);
                             }
 
-                            $.loader.close();
+                            $('#loadingModal').modal('hide');
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
-                            $.loader.close();
+                            $('#loadingModal').modal('hide');
                             alert(textStatus + " - " + errorThrown);
                         }
                     });
@@ -91,159 +251,5 @@
                 });
             });
         </script>
-    </head>
-    <body>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">
-                        <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#manual">Manually Constructed<span class="sr-only">(current)</span></a></li>
-                        <li><a href="#jpa">JPA</a></li>
-                        <li><a href="#namedjpa">Named JPA</a></li>
-                        <li><a href="#builder">Criteria Builder</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        <div class="jumbotron">
-            <div id="manual" class="tab-content active">
-                <div class="container">
-                    <form id="manualForm" action="/lq/api/manual">
-                        <div class="form-group">
-                            <label for="npi">NPI</label>
-                            <input type="text" class="form-control" id="npi" name="npi" placeholder="NPI" size="10" maxlength="10" />
-                        </div>
-                        <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" maxlength="255"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" maxlength="255" />
-                        </div>
-                        <div class="form-group">
-                            <label for="companyName">Company Name</label>
-                            <input type="text" class="form-control" id="companyName" name="companyName" placeholder="Company Name" maxlength="255" />
-                        </div>
-
-                        <button type="submit" class="btn btn-default">Submit</button>
-                        <button type="reset" class="btn">Reset</button>
-                    </form>
-                </div>
-            </div>
-            <div id="jpa" class="tab-content hide">
-                <div class="container">
-                    <form id="jpaForm" action="/lq/api/jpa">
-                        <div class="form-group">
-                            <label for="npi-jpa">NPI</label>
-                            <input type="text" class="form-control" id="npi-jpa" name="npi" placeholder="NPI" size="10" maxlength="10" />
-                        </div>
-                        <div class="form-group">
-                            <label for="firstName-jpa">First Name</label>
-                            <input type="text" class="form-control" id="firstName-jpa" name="firstName" placeholder="First Name" maxlength="255"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName-jpa">Last Name</label>
-                            <input type="text" class="form-control" id="lastName-jpa" name="lastName" placeholder="Last Name" maxlength="255" />
-                        </div>
-                        <div class="form-group">
-                            <label for="companyName-jpa">Company Name</label>
-                            <input type="text" class="form-control" id="companyName-jpa" name="companyName" placeholder="Company Name" maxlength="255" />
-                        </div>
-
-                        <button type="submit" class="btn btn-default">Submit</button>
-                        <button type="reset" class="btn">Reset</button>
-                    </form>
-                </div>
-            </div>
-            <div id="namedjpa" class="tab-content hide">
-                <div class="container">
-                    <form id="namedJpaForm" action="/lq/api/namedjpa">
-                        <div class="form-group">
-                            <label for="npi-namedJpa">NPI</label>
-                            <input type="text" class="form-control" id="npi-namedJpa" name="npi" placeholder="NPI" size="10" maxlength="10" />
-                        </div>
-                        <div class="form-group">
-                            <label for="firstName-namedJpa">First Name</label>
-                            <input type="text" class="form-control" id="firstName-namedJpa" name="firstName" placeholder="First Name" maxlength="255"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName-namedJpa">Last Name</label>
-                            <input type="text" class="form-control" id="lastName-namedJpa" name="lastName" placeholder="Last Name" maxlength="255" />
-                        </div>
-                        <div class="form-group">
-                            <label for="companyName-namedJpa">Company Name</label>
-                            <input type="text" class="form-control" id="companyName-namedJpa" name="companyName" placeholder="Company Name" maxlength="255" />
-                        </div>
-
-                        <button type="submit" class="btn btn-default">Submit</button>
-                        <button type="reset" class="btn">Reset</button>
-                    </form>
-                </div>
-            </div>
-            <div id="builder" class="tab-content hide">
-                <div class="container">
-                    <form id="builderForm" action="/lq/api/builder">
-                        <div class="form-group">
-                            <label for="npi-builder">NPI</label>
-                            <input type="text" class="form-control" id="npi-builder" name="npi" placeholder="NPI" size="10" maxlength="10" />
-                        </div>
-                        <div class="form-group">
-                            <label for="firstName-builder">First Name</label>
-                            <input type="text" class="form-control" id="firstName-builder" name="firstName" placeholder="First Name" maxlength="255"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName-builder">Last Name</label>
-                            <input type="text" class="form-control" id="lastName-builder" name="lastName" placeholder="Last Name" maxlength="255" />
-                        </div>
-                        <div class="form-group">
-                            <label for="companyName-builder">Company Name</label>
-                            <input type="text" class="form-control" id="companyName-builder" name="companyName" placeholder="Company Name" maxlength="255" />
-                        </div>
-
-                        <button type="submit" class="btn btn-default">Submit</button>
-                        <button type="reset" class="btn">Reset</button>
-                    </form>
-                </div>
-            </div>
-
-            <div id="data" class="tab-pane">
-                <div class="container">
-                    <h3>Results</h3>
-
-                    <table id="dataTable" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th>NPI</th>
-                                <th>Company</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
     </body>
 </html>
