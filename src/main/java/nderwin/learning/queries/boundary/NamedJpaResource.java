@@ -61,10 +61,10 @@ public class NamedJpaResource {
     ) {
         
         List<Nppes> data = em.createNamedQuery("Nppes.findAll", Nppes.class)
-                .setParameter("npi", npi)
-                .setParameter("companyName", companyName)
-                .setParameter("lastName", lastName)
-                .setParameter("firstName", firstName)
+                .setParameter("npi", npi == null ? null : npi.toUpperCase())
+                .setParameter("companyName", companyName == null ? null : companyName.toUpperCase())
+                .setParameter("lastName", lastName == null ? null : lastName.toUpperCase())
+                .setParameter("firstName", firstName == null ? null : firstName.toUpperCase())
                 .setMaxResults(limit)
                 .getResultList();
 

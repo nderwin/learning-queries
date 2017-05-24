@@ -112,25 +112,25 @@ public class BuilderResource {
         
         if (null != npi && !npi.trim().isEmpty()) {
             criteria.add(
-                    builder.equal(root.get(Nppes_.npi), builder.literal(npi))
+                    builder.equal(root.get(Nppes_.npi), builder.literal(npi.toUpperCase()))
             );
         }
         
         if (null != firstName && !firstName.trim().isEmpty()) {
             criteria.add(
-                    builder.equal(root.get(Nppes_.providerFirstName), builder.literal(firstName))
+                    builder.equal(root.get(Nppes_.providerFirstName), builder.literal(firstName.toUpperCase()))
             );
         }
         
         if (null != lastName && !lastName.trim().isEmpty()) {
             criteria.add(
-                    builder.equal(root.get(Nppes_.providerLastNameLegalName), builder.literal(lastName))
+                    builder.equal(root.get(Nppes_.providerLastNameLegalName), builder.literal(lastName.toUpperCase()))
             );
         }
         
         if (null != companyName && !companyName.trim().isEmpty()) {
             criteria.add(
-                    builder.equal(root.get(Nppes_.providerOrganizationNameLegalBusinessName), builder.literal(companyName))
+                    builder.equal(root.get(Nppes_.providerOrganizationNameLegalBusinessName), builder.literal(companyName.toUpperCase()))
             );
         }
         

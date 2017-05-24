@@ -77,7 +77,7 @@ public class ManualResource {
                 }
                 
                 sb.append(" \"NPI\" = '");
-                sb.append(npi);
+                sb.append(npi.toUpperCase());
                 sb.append("'");
             }
 
@@ -90,7 +90,7 @@ public class ManualResource {
                 }
                 
                 sb.append(" \"Provider_First_Name\" = '");
-                sb.append(firstName);
+                sb.append(firstName.toUpperCase());
                 sb.append("'");
             }
 
@@ -103,7 +103,7 @@ public class ManualResource {
                 }
                 
                 sb.append(" \"Provider_Last_Name__Legal_Name\" = '");
-                sb.append(lastName);
+                sb.append(lastName.toUpperCase());
                 sb.append("'");
             }
 
@@ -115,7 +115,7 @@ public class ManualResource {
                 }
                 
                 sb.append(" \"Provider_Organization_Name__Legal_Business_Name\" = '");
-                sb.append(companyName);
+                sb.append(companyName.toUpperCase());
                 sb.append("'");
             }
 
