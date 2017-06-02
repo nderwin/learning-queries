@@ -21,9 +21,6 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.json.Json;
-import javax.json.JsonArrayBuilder;
-import javax.json.JsonObjectBuilder;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -48,10 +45,10 @@ import nderwin.learning.queries.entity.Nppes_;
 @Stateless
 @LocalBean
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-@Path("/builder")
+@Path("/multiselect")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class BuilderResource {
+public class MultiselectBuilderResource {
 
     @PersistenceContext
     EntityManager em;
@@ -70,13 +67,18 @@ public class BuilderResource {
         CriteriaBuilder builder = em.getCriteriaBuilder();
 
         // Create the query
-        CriteriaQuery<Nppes> query = builder.createQuery(Nppes.class);
+        CriteriaQuery<NppesListData> query = builder.createQuery(NppesListData.class);
 
         // Create the FROM clause
         Root<Nppes> root = query.from(Nppes.class);
 
         // Create the SELECT clause
-        query.select(root);
+        query.multiselect(
+                root.get(Nppes_.npi),
+                root.get(Nppes_.providerOrganizationNameLegalBusinessName),
+                root.get(Nppes_.providerFirstName),
+                root.get(Nppes_.providerLastNameLegalName)
+        );
 
         // Create the WHERE clause
         createWhereClause(builder, root, query, npi, firstName, lastName, companyName);
@@ -88,26 +90,14 @@ public class BuilderResource {
                 builder.asc(root.get(Nppes_.npi))
         );
 
-        List<Nppes> data = em.createQuery(query)
+        List<NppesListData> data = em.createQuery(query)
                 .setMaxResults(limit)
                 .getResultList();
 
-        JsonArrayBuilder jab = Json.createArrayBuilder();
-        data.stream().map((nppes) -> {
-            JsonObjectBuilder job = Json.createObjectBuilder();
-            job.add("NPI", nppes.getNpi());
-            job.add("companyName", nppes.getProviderOrganizationNameLegalBusinessName());
-            job.add("firstName", nppes.getProviderFirstName());
-            job.add("lastName", nppes.getProviderLastNameLegalName());
-            return job;
-        }).forEachOrdered((job) -> {
-            jab.add(job);
-        });
-
-        return Response.ok(jab.build()).build();
+        return Response.ok(data).build();
     }
 
-    private void createWhereClause(final CriteriaBuilder builder, final Root<Nppes> root, final CriteriaQuery<Nppes> query, final String npi, final String firstName, final String lastName, final String companyName) {
+    private void createWhereClause(final CriteriaBuilder builder, final Root<Nppes> root, final CriteriaQuery<NppesListData> query, final String npi, final String firstName, final String lastName, final String companyName) {
         List<Predicate> criteria = new ArrayList<>();
 
         if (null != npi && !npi.trim().isEmpty()) {

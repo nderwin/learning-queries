@@ -119,7 +119,7 @@ public class ManualResource {
                 sb.append("'");
             }
 
-            sb.append(" ORDER BY \"Provider_Last_Name__Legal_Name\", \"Provider_First_Name\"");
+            sb.append(" ORDER BY \"Provider_Last_Name__Legal_Name\", \"Provider_First_Name\", \"NPI\"");
             sb.append(" LIMIT ");
             sb.append(limit);
             
