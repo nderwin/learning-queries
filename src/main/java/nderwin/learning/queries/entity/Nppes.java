@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlRootElement;
                     + "OR (:companyName IS NOT NULL AND LENGTH(:companyName) > 0 AND n.providerOrganizationNameLegalBusinessName = :companyName) "
                     + "OR (:lastName IS NOT NULL AND LENGTH(:lastName) > 0 AND n.providerLastNameLegalName = :lastName) "
                     + "OR (:firstName IS NOT NULL AND LENGTH(:firstName) > 0 AND n.providerFirstName = :firstName) "
-                    + "ORDER BY n.providerLastNameLegalName, n.providerFirstName"
+                    + "ORDER BY n.providerLastNameLegalName, n.providerFirstName, n.npi"
     )
 })
 public class Nppes implements Serializable {

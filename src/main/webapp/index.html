@@ -39,6 +39,7 @@
             <li role="presentation"><a href="#jpa" role="tab" data-toggle="tab">JPA</a></li>
             <li role="presentation"><a href="#namedjpa" role="tab" data-toggle="tab">Named JPA</a></li>
             <li role="presentation"><a href="#builder" role="tab" data-toggle="tab">Criteria Builder</a></li>
+            <li role="presentation"><a href="#multiselect" role="tab" data-toggle="tab">CB - Multiselect</a></li>
         </ul>
 
         <div class="tab-content">
@@ -135,6 +136,31 @@
                         <div class="form-group">
                             <label for="companyName-builder">Company Name</label>
                             <input type="text" class="form-control" id="companyName-builder" name="companyName" placeholder="Company Name" maxlength="255" />
+                        </div>
+
+                        <button type="submit" class="btn btn-default">Submit</button>
+                        <button type="reset" class="btn">Reset</button>
+                    </form>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="multiselect">
+                <div class="container">
+                    <form id="multiselectForm" action="/lq/api/multiselect">
+                        <div class="form-group">
+                            <label for="npi-multiselect">NPI</label>
+                            <input type="text" class="form-control" id="npi-multiselect" name="npi" placeholder="NPI" size="10" maxlength="10" />
+                        </div>
+                        <div class="form-group">
+                            <label for="firstName-multiselect">First Name</label>
+                            <input type="text" class="form-control" id="firstName-multiselect" name="firstName" placeholder="First Name" maxlength="255"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName-multiselect">Last Name</label>
+                            <input type="text" class="form-control" id="lastName-multiselect" name="lastName" placeholder="Last Name" maxlength="255" />
+                        </div>
+                        <div class="form-group">
+                            <label for="companyName-multiselect">Company Name</label>
+                            <input type="text" class="form-control" id="companyName-multiselect" name="companyName" placeholder="Company Name" maxlength="255" />
                         </div>
 
                         <button type="submit" class="btn btn-default">Submit</button>
@@ -247,6 +273,11 @@
 
                 // JPA tab setup
                 $('#builderForm').submit(function (evt) {
+                    formSubmit($(this), evt);
+                });
+                
+                // JPA tab setup
+                $('#multiselectForm').submit(function (evt) {
                     formSubmit($(this), evt);
                 });
             });

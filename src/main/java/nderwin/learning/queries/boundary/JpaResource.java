@@ -113,7 +113,7 @@ public class JpaResource {
             addCn = true;
         }
         
-        sb.append(" ORDER BY n.providerLastNameLegalName, n.providerFirstName");
+        sb.append(" ORDER BY n.providerLastNameLegalName, n.providerFirstName, n.npi");
 
         TypedQuery<Nppes> tq = em.createQuery(sb.toString(), Nppes.class);
         
